@@ -149,32 +149,31 @@ export default function BillingPage() {
               </span>
             </div>
 
-            <div style={{ font: "800 38px var(--display)", color: "var(--text)", letterSpacing: "-0.03em", marginBottom: 6 }}>
+            <div style={{ font: "800 36px var(--display)", color: "var(--text)", letterSpacing: "-0.03em", marginBottom: 4 }}>
               ₦{balance.toLocaleString()}.00
             </div>
-
-            <p style={{ fontSize: 13, color: "var(--muted)", margin: "0 0 16px", lineHeight: 1.5 }}>
-              Automatically deducted when initiating CAC registrations, biometric verifications, or global D-U-N-S filings without card authorization delays.
-            </p>
+            <div style={{ fontSize: 13, color: "var(--muted)", marginBottom: 14 }}>
+              Available for instant filings checkout.
+            </div>
           </div>
 
           {/* Virtual Account Box */}
-          <div style={{ background: "var(--soft)", padding: 16, borderRadius: 12, border: "1px dashed var(--line)" }}>
+          <div style={{ background: "var(--soft)", padding: 14, borderRadius: 12, border: "1px dashed var(--line)" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div>
                 <div style={{ fontSize: 11, color: "var(--muted)", textTransform: "uppercase", letterSpacing: 0.8, fontWeight: 700 }}>
-                  Automated Wire Transfer NUBAN (24/7)
+                  Dedicated Virtual NUBAN
                 </div>
-                <div style={{ font: "700 17px var(--display)", marginTop: 2, color: "var(--text)" }}>
+                <div style={{ font: "700 16px var(--display)", marginTop: 2, color: "var(--text)" }}>
                   0829148102 • Wema Bank
                 </div>
-                <div style={{ fontSize: 12, color: "var(--muted)" }}>Whitestones / BrandIDPool Adebayo</div>
+                <div style={{ fontSize: 12, color: "var(--muted)" }}>Whitestones / Adebayo Ogunlesi</div>
               </div>
               <button
                 className="btn btn-secondary btn-sm copy-pill"
                 onClick={() => copyToClipboard("0829148102")}
               >
-                {copiedAccount ? "Copied! ✓" : "Copy Account"}
+                {copiedAccount ? "Copied! ✓" : "Copy"}
               </button>
             </div>
           </div>
@@ -182,41 +181,41 @@ export default function BillingPage() {
       </div>
 
       {/* Spending Breakdown & Quick Cards */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, marginBottom: 28 }} className="anim-enter anim-delay-1">
-        <div className="card">
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-            <span style={{ fontSize: 13, fontWeight: 600, color: "var(--muted)" }}>Total Debited This Month</span>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16, marginBottom: 24 }}>
+        <div className="card" style={{ padding: "18px 20px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+            <span style={{ fontSize: 13, fontWeight: 600, color: "var(--muted)" }}>Debited This Month</span>
             <span style={{ fontSize: 12, color: "var(--blue)", fontWeight: 700 }}>4 Filings</span>
           </div>
-          <div style={{ font: "800 24px var(--display)", color: "var(--text)" }}>₦205,000.00</div>
-          <div style={{ fontSize: 13, color: "var(--muted)", marginTop: 4 }}>Corporate registration & compliance</div>
+          <div style={{ font: "800 22px var(--display)", color: "var(--text)" }}>₦205,000.00</div>
+          <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 4 }}>Corporate registration & compliance</div>
         </div>
 
-        <div className="card">
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-            <span style={{ fontSize: 13, fontWeight: 600, color: "var(--muted)" }}>Saved Card Method</span>
+        <div className="card" style={{ padding: "18px 20px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+            <span style={{ fontSize: 13, fontWeight: 600, color: "var(--muted)" }}>Payment Method</span>
             <span style={{ fontSize: 11, background: "rgba(12,202,74,.1)", color: "#059642", padding: "2px 8px", borderRadius: 6, fontWeight: 700 }}>DEFAULT</span>
           </div>
-          <div style={{ font: "700 18px var(--display)", color: "var(--text)" }}>Mastercard ending in 4921</div>
-          <div style={{ fontSize: 13, color: "var(--muted)", marginTop: 4 }}>Auto-refill threshold: ₦10,000</div>
+          <div style={{ font: "700 16px var(--display)", color: "var(--text)" }}>Mastercard •••• 4921</div>
+          <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 4 }}>Auto-refill threshold: ₦10,000</div>
         </div>
 
-        <div className="card">
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-            <span style={{ fontSize: 13, fontWeight: 600, color: "var(--muted)" }}>FIRS & Tax Receipts</span>
-            <span style={{ fontSize: 12, color: "#059642", fontWeight: 700 }}>100% Tax Compliant</span>
+        <div className="card" style={{ padding: "18px 20px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+            <span style={{ fontSize: 13, fontWeight: 600, color: "var(--muted)" }}>Tax & VAT Paid</span>
+            <span style={{ fontSize: 12, color: "#059642", fontWeight: 700 }}>Compliant</span>
           </div>
-          <div style={{ font: "800 24px var(--display)", color: "var(--text)" }}>₦20,500 VAT</div>
-          <div style={{ fontSize: 13, color: "var(--muted)", marginTop: 4 }}>Deductible statutory VAT remittances</div>
+          <div style={{ font: "800 22px var(--display)", color: "var(--text)" }}>₦20,500 VAT</div>
+          <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 4 }}>Statutory remittances remitted</div>
         </div>
       </div>
 
       {/* Transactions & Invoices Table */}
-      <div className="card anim-enter anim-delay-2">
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, flexWrap: "wrap", gap: 12 }}>
+      <div className="card">
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14, flexWrap: "wrap", gap: 12 }}>
           <div>
-            <h3 style={{ font: "700 18px var(--display)", margin: 0 }}>Transaction Ledger & Tax Invoices</h3>
-            <p style={{ fontSize: 13, color: "var(--muted)", margin: "2px 0 0" }}>Complete cryptographic audit log of all account deposits and debits</p>
+            <h3 style={{ font: "700 18px var(--display)", margin: 0 }}>Transaction History</h3>
+            <p style={{ fontSize: 13, color: "var(--muted)", margin: "2px 0 0" }}>Recent deposits, statutory debits, and receipts</p>
           </div>
           <div className="tab-bar" style={{ margin: 0, border: "none" }}>
             {[
