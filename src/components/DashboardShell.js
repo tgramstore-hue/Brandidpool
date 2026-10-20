@@ -156,6 +156,15 @@ export const defaultAdminNavItems = [
 ];
 
 export function Sidebar({ items, activeItem, userInfo, isAdmin = false, isOpen, onClose }) {
+  // Lock body scroll when mobile sidebar is open so it's static and doesn't scroll with page
+  if (typeof window !== "undefined") {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }
+
   return (
     <>
       <aside className={`sidebar${isOpen ? " open" : ""}`}>
@@ -247,12 +256,7 @@ export function Sidebar({ items, activeItem, userInfo, isAdmin = false, isOpen, 
 
       {isOpen && (
         <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            background: "rgba(0,0,0,.4)",
-            zIndex: 40,
-          }}
+          className="sidebar-backdrop"
           onClick={onClose}
         />
       )}
@@ -260,7 +264,7 @@ export function Sidebar({ items, activeItem, userInfo, isAdmin = false, isOpen, 
   );
 }
 
-export function DashboardTopbar({ onToggleSidebar, searchPlaceholder = "Search services, applications…" }) {
+export function DashboardTopbar({ onToggleSidebar, isAdmin = false }) {
   const [showNotifications, setShowNotifications] = useState(false);
 
   return (
@@ -275,14 +279,18 @@ export function DashboardTopbar({ onToggleSidebar, searchPlaceholder = "Search s
             <path d="M3 12h18M3 6h18M3 18h18" />
           </svg>
         </button>
-        <div className="topbar-search">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            <circle cx="11" cy="11" r="7" />
-            <path d="M21 21l-4-4" />
-          </svg>
-          <input type="text" placeholder={searchPlaceholder} />
+
+        {/* Company Name & Tier 1 Badge (Replaces search bar per user request) */}
+        <div className="topbar-entity-badge">
+          <span className="topbar-entity-name">
+            {isAdmin ? "Super Admin Console" : "Whitestones Global Logistics Ltd"}
+          </span>
+          <span className="topbar-tier-tag">
+            {isAdmin ? "Admin" : "Tier 1 Verified"}
+          </span>
         </div>
       </div>
+
       <div className="topbar-actions">
         <div
           className="topbar-icon"
@@ -295,7 +303,7 @@ export function DashboardTopbar({ onToggleSidebar, searchPlaceholder = "Search s
           </svg>
           <span className="notif-dot"></span>
         </div>
-        <Link href="/dashboard/settings" className="topbar-icon" title="Settings">
+        <Link href={isAdmin ? "/admin/dashboard/settings" : "/dashboard/settings"} className="topbar-icon" title="Settings">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <circle cx="12" cy="12" r="3" />
             <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
@@ -359,10 +367,10 @@ export default function DashboardLayout({
       />
       <div className="dashboard-main">
         <DashboardTopbar
+          isAdmin={isAdmin}
           onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
-          searchPlaceholder={isAdmin ? "Search applications, users, logs…" : "Search services, filings, documents…"}
         />
-        <div className="dashboard-content">{children}</div>
+        <div className="dashboard-content animate-rise">{children}</div>
       </div>
     </div>
   );

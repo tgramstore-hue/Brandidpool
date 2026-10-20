@@ -19,10 +19,10 @@ const recentApplications = [
 ];
 
 const activityFeed = [
-  { color: "green", title: "NIN Digital Slip Generated", time: "2h ago" },
-  { color: "blue", title: "CAC Registry Stamp Duties Paid", time: "5h ago" },
-  { color: "orange", title: "Tax Office Declaration Notice", time: "1d ago" },
-  { color: "green", title: "D-U-N-S Number Issued", time: "3d ago" },
+  { color: "green", title: "NIN Digital Slip Generated", time: "2h ago", link: "/dashboard/documents", label: "View Slip →" },
+  { color: "blue", title: "CAC Registry Stamp Duties Paid", time: "5h ago", link: "/dashboard/applications", label: "Track →" },
+  { color: "orange", title: "Tax Office Declaration Notice", time: "1d ago", link: "/dashboard/applications", label: "Resolve →" },
+  { color: "green", title: "D-U-N-S Number Issued", time: "3d ago", link: "/dashboard/documents", label: "View Doc →" },
 ];
 
 export default function DashboardPage() {
@@ -239,18 +239,41 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Activity Stream */}
+        {/* Activity Stream with Direct Links */}
         <div className="card" style={{ padding: "16px 20px" }}>
-          <h3 style={{ font: "700 16px var(--display)", margin: "0 0 12px" }}>Activity Timeline</h3>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+            <h3 style={{ font: "700 16px var(--display)", margin: 0 }}>Activity Timeline</h3>
+            <span style={{ fontSize: 11, color: "var(--muted)", fontWeight: 600 }}>Live Updates</span>
+          </div>
 
           <div>
             {activityFeed.map((item, i) => (
-              <div key={i} className="pro-feed-item">
-                <span className={`pro-feed-dot ${item.color}`}></span>
-                <div>
-                  <div className="pro-feed-title">{item.title}</div>
-                  <div className="pro-feed-time">{item.time}</div>
+              <div key={i} className="pro-feed-item" style={{ alignItems: "center", justifyContent: "space-between" }}>
+                <div style={{ display: "flex", gap: 10, alignItems: "flex-start", flex: 1, minWidth: 0 }}>
+                  <span className={`pro-feed-dot ${item.color}`}></span>
+                  <div style={{ minWidth: 0 }}>
+                    <div className="pro-feed-title" style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                      {item.title}
+                    </div>
+                    <div className="pro-feed-time">{item.time}</div>
+                  </div>
                 </div>
+                <Link
+                  href={item.link}
+                  style={{
+                    fontSize: 11,
+                    fontWeight: 700,
+                    color: "var(--blue)",
+                    whiteSpace: "nowrap",
+                    flex: "none",
+                    marginLeft: 8,
+                    padding: "3px 8px",
+                    borderRadius: 6,
+                    background: "rgba(31,167,217,0.08)",
+                  }}
+                >
+                  {item.label}
+                </Link>
               </div>
             ))}
           </div>
