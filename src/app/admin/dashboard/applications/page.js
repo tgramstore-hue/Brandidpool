@@ -189,7 +189,8 @@ export default function AdminApplicationsPage() {
 
       {/* Table */}
       <div className="card">
-        <div style={{ overflowX: "auto" }}>
+        {/* Desktop Table View */}
+        <div className="desktop-table-view" style={{ overflowX: "auto" }}>
           <table className="app-table">
             <thead>
               <tr>
@@ -261,6 +262,45 @@ export default function AdminApplicationsPage() {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile View Card List (No zooming needed) */}
+        <div className="mobile-card-list">
+          {filtered.length === 0 ? (
+            <div style={{ textAlign: "center", padding: "30px 16px", color: "var(--muted)", fontSize: 13 }}>
+              No filings found.
+            </div>
+          ) : (
+            filtered.map((app) => (
+              <div key={app.id} className="mobile-filing-card" onClick={() => setInspectApp(app)} style={{ cursor: "pointer" }}>
+                <div style={{ flex: 1, minWidth: 0, paddingRight: 10 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 2 }}>
+                    <span style={{ fontWeight: 700, fontFamily: "monospace", fontSize: 12, color: "var(--text)" }}>{app.id}</span>
+                    <span className={`status-badge ${app.status}`} style={{ fontSize: 10, padding: "2px 6px" }}>
+                      {app.status === "processing" ? "In Review" :
+                       app.status === "approved" ? "Approved" :
+                       app.status === "pending" ? "Action" : "Flagged"}
+                    </span>
+                  </div>
+                  <div style={{ fontWeight: 600, fontSize: 13, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                    {app.entity}
+                  </div>
+                  <div style={{ fontSize: 11, color: "var(--muted)", display: "flex", gap: 6 }}>
+                    <span>{app.applicant}</span>
+                    <span>•</span>
+                    <span>{app.fee}</span>
+                  </div>
+                </div>
+                <button
+                  className="btn btn-secondary btn-sm"
+                  style={{ height: 30, fontSize: 11, padding: "0 10px", flex: "none" }}
+                  onClick={(e) => { e.stopPropagation(); setInspectApp(app); }}
+                >
+                  Dossier
+                </button>
+              </div>
+            ))
+          )}
         </div>
       </div>
 

@@ -159,20 +159,41 @@ export function Sidebar({ items, activeItem, userInfo, isAdmin = false, isOpen, 
   return (
     <>
       <aside className={`sidebar${isOpen ? " open" : ""}`}>
-        <div className="sidebar-header">
-          <Link className="logo" href="/">
-            brandid<b>pool</b>
-          </Link>
-          {isAdmin && (
-            <div style={{ marginTop: 8 }}>
-              <span className="admin-badge">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}>
-                  <path d="M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5z" />
-                </svg>
-                Admin Portal
-              </span>
-            </div>
-          )}
+        <div className="sidebar-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+          <div>
+            <Link className="logo" href="/">
+              brandid<b>pool</b>
+            </Link>
+            {isAdmin && (
+              <div style={{ marginTop: 8 }}>
+                <span className="admin-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}>
+                    <path d="M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5z" />
+                  </svg>
+                  Admin Portal
+                </span>
+              </div>
+            )}
+          </div>
+          <button
+            className="sidebar-close-btn"
+            onClick={onClose}
+            aria-label="Close sidebar"
+            style={{
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+              padding: 6,
+              color: "var(--muted)",
+              borderRadius: 8,
+              display: "none",
+            }}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" style={{ width: 20, height: 20 }}>
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
         </div>
 
         <div className="sidebar-nav">

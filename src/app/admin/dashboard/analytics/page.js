@@ -43,57 +43,42 @@ export default function AdminAnalyticsPage() {
         </div>
       </div>
 
-      {/* Metrics Row */}
-      <div className="metrics-grid">
-        <div className="metric-card">
-          <div className="metric-header">
-            <span className="metric-label">Total Fee Collections</span>
-            <span className="metric-change positive">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <polyline points="18 15 12 9 6 15" />
-              </svg>
-              +24% vs Sep
-            </span>
+      {/* Compact Horizontal Metric Cards */}
+      <div className="metrics-row-compact">
+        <div className="metric-card-compact">
+          <div className="m-label">
+            <span>Fee Collections</span>
+            <span className="metric-change positive" style={{ fontSize: 10, padding: "2px 6px" }}>+24%</span>
           </div>
-          <div className="metric-value">₦42.8M</div>
-          <div className="metric-sub">Net revenue after statutory remittances</div>
+          <div className="m-val">₦42.8M</div>
+          <div className="m-sub">Net revenue collections</div>
         </div>
 
-        <div className="metric-card">
-          <div className="metric-header">
-            <span className="metric-label">Applications Volume</span>
-            <span className="metric-change positive">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <polyline points="18 15 12 9 6 15" />
-              </svg>
-              3,420 total
-            </span>
+        <div className="metric-card-compact">
+          <div className="m-label">
+            <span>Total Filings</span>
+            <span className="metric-change positive" style={{ fontSize: 10, padding: "2px 6px" }}>94.6% appv</span>
           </div>
-          <div className="metric-value">3,420</div>
-          <div className="metric-sub">94.6% overall registry approval rate</div>
+          <div className="m-val">3,420</div>
+          <div className="m-sub">Registry approval rate</div>
         </div>
 
-        <div className="metric-card">
-          <div className="metric-header">
-            <span className="metric-label">Average Processing Time</span>
-            <span className="metric-change positive">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <polyline points="18 15 12 9 6 15" />
-              </svg>
-              -35% faster
-            </span>
+        <div className="metric-card-compact">
+          <div className="m-label">
+            <span>Processing SLA</span>
+            <span className="metric-change positive" style={{ fontSize: 10, padding: "2px 6px" }}>-35% fast</span>
           </div>
-          <div className="metric-value">2.1 Days</div>
-          <div className="metric-sub">Across all 5 regulatory boards</div>
+          <div className="m-val">2.1 Days</div>
+          <div className="m-sub">Across 5 boards</div>
         </div>
 
-        <div className="metric-card">
-          <div className="metric-header">
-            <span className="metric-label">User Retention Rate</span>
-            <span className="metric-change positive">High</span>
+        <div className="metric-card-compact">
+          <div className="m-label">
+            <span>User Retention</span>
+            <span className="metric-change positive" style={{ fontSize: 10, padding: "2px 6px" }}>High</span>
           </div>
-          <div className="metric-value">88.4%</div>
-          <div className="metric-sub">Repeat filings per corporate user</div>
+          <div className="m-val">88.4%</div>
+          <div className="m-sub">Repeat corporate users</div>
         </div>
       </div>
 

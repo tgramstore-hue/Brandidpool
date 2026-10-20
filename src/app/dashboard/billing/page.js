@@ -234,7 +234,8 @@ export default function BillingPage() {
           </div>
         </div>
 
-        <div style={{ overflowX: "auto" }}>
+        {/* Desktop Table View */}
+        <div className="desktop-table-view" style={{ overflowX: "auto" }}>
           <table className="app-table">
             <thead>
               <tr>
@@ -286,6 +287,44 @@ export default function BillingPage() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile View Card List */}
+        <div className="mobile-card-list">
+          {filteredTxns.map((tx) => (
+            <div key={tx.id} className="mobile-filing-card" onClick={() => setViewReceipt(tx)} style={{ cursor: "pointer" }}>
+              <div style={{ flex: 1, minWidth: 0, paddingRight: 10 }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 2 }}>
+                  <span style={{ fontWeight: 700, fontFamily: "monospace", fontSize: 12, color: "var(--text)" }}>{tx.id}</span>
+                  <span
+                    style={{
+                      fontWeight: 700,
+                      fontSize: 13,
+                      fontFamily: "var(--display)",
+                      color: tx.type === "credit" ? "#059642" : "var(--text)",
+                    }}
+                  >
+                    {tx.amount}
+                  </span>
+                </div>
+                <div style={{ fontWeight: 600, fontSize: 13, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  {tx.service}
+                </div>
+                <div style={{ fontSize: 11, color: "var(--muted)", display: "flex", gap: 6, marginTop: 2 }}>
+                  <span>{tx.date}</span>
+                  <span>•</span>
+                  <span>{tx.method}</span>
+                </div>
+              </div>
+              <button
+                className="btn btn-secondary btn-sm"
+                style={{ height: 30, fontSize: 11, padding: "0 10px", flex: "none" }}
+                onClick={(e) => { e.stopPropagation(); setViewReceipt(tx); }}
+              >
+                Receipt
+              </button>
+            </div>
+          ))}
         </div>
       </div>
 

@@ -56,7 +56,7 @@ export default function SettingsPage() {
         <p style={{ color: "var(--muted)", margin: "4px 0 0" }}>Manage your identity credentials, KYC verification, security, and alerts.</p>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 24 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))", gap: 24 }}>
         {/* Profile Details Form */}
         <div className="settings-section">
           <div className="settings-section-header">

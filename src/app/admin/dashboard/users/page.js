@@ -161,7 +161,8 @@ export default function AdminUsersPage() {
 
       {/* Table */}
       <div className="card">
-        <div style={{ overflowX: "auto" }}>
+        {/* Desktop Table View */}
+        <div className="desktop-table-view" style={{ overflowX: "auto" }}>
           <table className="app-table">
             <thead>
               <tr>
@@ -231,6 +232,43 @@ export default function AdminUsersPage() {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile View Card List */}
+        <div className="mobile-card-list">
+          {filteredUsers.length === 0 ? (
+            <div style={{ textAlign: "center", padding: "30px 16px", color: "var(--muted)", fontSize: 13 }}>
+              No users found.
+            </div>
+          ) : (
+            filteredUsers.map((u) => (
+              <div key={u.id} className="mobile-filing-card" onClick={() => setSelectedUser(u)} style={{ cursor: "pointer" }}>
+                <div style={{ flex: 1, minWidth: 0, paddingRight: 10 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 2 }}>
+                    <span style={{ fontWeight: 700, fontSize: 13, color: "var(--text)" }}>{u.name}</span>
+                    <span className={`status-badge ${u.status === "active" ? "approved" : "rejected"}`} style={{ fontSize: 10, padding: "2px 6px" }}>
+                      {u.status === "active" ? "Active" : "Suspended"}
+                    </span>
+                  </div>
+                  <div style={{ fontSize: 12, color: "var(--muted)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                    {u.company}
+                  </div>
+                  <div style={{ fontSize: 11, color: "var(--muted)", display: "flex", gap: 8, marginTop: 2 }}>
+                    <span style={{ color: "var(--blue)" }}>KYC: {u.kycStatus}</span>
+                    <span>•</span>
+                    <span>{u.walletBalance}</span>
+                  </div>
+                </div>
+                <button
+                  className="btn btn-secondary btn-sm"
+                  style={{ height: 30, fontSize: 11, padding: "0 10px", flex: "none" }}
+                  onClick={(e) => { e.stopPropagation(); setSelectedUser(u); }}
+                >
+                  Profile
+                </button>
+              </div>
+            ))
+          )}
         </div>
       </div>
 

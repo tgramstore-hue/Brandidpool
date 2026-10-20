@@ -46,7 +46,7 @@ export default function AdminSettingsPage() {
         <p style={{ color: "var(--muted)", margin: "4px 0 0" }}>Manage government registry API bridges, admin team permissions, and audit trails.</p>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 24 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))", gap: 24 }}>
         {/* Government API Gateway Config */}
         <div className="settings-section">
           <div className="settings-section-header">

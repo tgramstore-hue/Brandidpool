@@ -199,11 +199,7 @@ export default function DocumentsPage() {
             </div>
 
             <div className="doc-card-title">{doc.title}</div>
-            <div className="doc-card-meta">{doc.issuedBy} • {doc.date}</div>
-
-            <p style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.5, margin: "0 0 16px" }}>
-              {doc.description}
-            </p>
+            <div className="doc-card-meta" style={{ marginBottom: 14 }}>{doc.issuedBy} • {doc.date}</div>
 
             <div className="doc-actions">
               <button

@@ -90,61 +90,48 @@ export default function AdminDashboardPage() {
         </div>
       </div>
 
-      {/* 4 Executive Metric Cards */}
-      <div className="metrics-grid" style={{ marginBottom: 24 }}>
-        <div className="metric-card">
-          <div className="metric-header">
-            <span className="metric-label">Registered Customers</span>
-            <span className="metric-change positive">+14% MoM</span>
+      {/* Compact Horizontal Metric Cards */}
+      <div className="metrics-row-compact">
+        <div className="metric-card-compact">
+          <div className="m-label">
+            <span>Customers</span>
+            <span className="metric-change positive" style={{ fontSize: 10, padding: "2px 6px" }}>+14%</span>
           </div>
-          <div className="metric-value">1,428</div>
-          <div className="metric-sub">98.2% KYC verified profiles</div>
-          <div style={{ height: 4, background: "var(--soft)", borderRadius: 2, marginTop: 10, overflow: "hidden" }}>
-            <div style={{ width: "94%", height: "100%", background: "var(--blue)" }} />
-          </div>
+          <div className="m-val">1,428</div>
+          <div className="m-sub">98.2% KYC verified</div>
         </div>
 
-        <div className="metric-card">
-          <div className="metric-header">
-            <span className="metric-label">Review Queue Pending</span>
-            <span className="metric-change negative">
-              {reviews.filter(r => r.status !== 'approved').length} In Queue
+        <div className="metric-card-compact">
+          <div className="m-label">
+            <span>Review Queue</span>
+            <span className="metric-change negative" style={{ fontSize: 10, padding: "2px 6px" }}>
+              {reviews.filter(r => r.status !== 'approved').length} Active
             </span>
           </div>
-          <div className="metric-value" style={{ color: "var(--orange)" }}>
+          <div className="m-val" style={{ color: "var(--orange)" }}>
             {reviews.filter(r => r.status !== 'approved').length}
           </div>
-          <div className="metric-sub">Average resolution: 3.2 hrs</div>
-          <div style={{ height: 4, background: "var(--soft)", borderRadius: 2, marginTop: 10, overflow: "hidden" }}>
-            <div style={{ width: "45%", height: "100%", background: "var(--orange)" }} />
-          </div>
+          <div className="m-sub">Avg resolution: 3.2h</div>
         </div>
 
-        <div className="metric-card">
-          <div className="metric-header">
-            <span className="metric-label">Monthly Gross Revenue</span>
-            <span className="metric-change positive">+28% YoY</span>
+        <div className="metric-card-compact">
+          <div className="m-label">
+            <span>Monthly Revenue</span>
+            <span className="metric-change positive" style={{ fontSize: 10, padding: "2px 6px" }}>+28%</span>
           </div>
-          <div className="metric-value">₦44.8M</div>
-          <div className="metric-sub">October 2026 collections</div>
-          <div style={{ height: 4, background: "var(--soft)", borderRadius: 2, marginTop: 10, overflow: "hidden" }}>
-            <div style={{ width: "88%", height: "100%", background: "#059642" }} />
-          </div>
+          <div className="m-val">₦44.8M</div>
+          <div className="m-sub">October 2026 total</div>
         </div>
 
-        <div className="metric-card">
-          <div className="metric-header">
-            <span className="metric-label">API Gateway Status</span>
-            <span className="live-indicator">
-              <span className="dot"></span>
-              Operational
+        <div className="metric-card-compact">
+          <div className="m-label">
+            <span>API Gateways</span>
+            <span className="live-indicator" style={{ fontSize: 10, padding: "2px 6px" }}>
+              <span className="dot"></span>Live
             </span>
           </div>
-          <div className="metric-value" style={{ color: "#059642" }}>99.98%</div>
-          <div className="metric-sub">NIMC • CAC • FIRS • D&B</div>
-          <div style={{ height: 4, background: "var(--soft)", borderRadius: 2, marginTop: 10, overflow: "hidden" }}>
-            <div style={{ width: "99%", height: "100%", background: "#059642" }} />
-          </div>
+          <div className="m-val" style={{ color: "#059642" }}>99.98%</div>
+          <div className="m-sub">CAC • NIMC • FIRS</div>
         </div>
       </div>
 
@@ -245,8 +232,8 @@ export default function AdminDashboardPage() {
             <p style={{ fontSize: 13, color: "var(--muted)", margin: "2px 0 0" }}>Inspect and approve customer registry filings</p>
           </div>
 
-          <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-            <div className="search-box" style={{ minWidth: 200, padding: "6px 12px" }}>
+          <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+            <div className="search-box" style={{ minWidth: 180, padding: "6px 12px" }}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" style={{ width: 14, height: 14 }}>
                 <circle cx="11" cy="11" r="7" />
                 <path d="M21 21l-4-4" />
@@ -278,7 +265,8 @@ export default function AdminDashboardPage() {
           </div>
         </div>
 
-        <div style={{ overflowX: "auto" }}>
+        {/* Desktop View Table */}
+        <div className="desktop-table-view" style={{ overflowX: "auto" }}>
           <table className="app-table">
             <thead>
               <tr>
@@ -337,6 +325,37 @@ export default function AdminDashboardPage() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile View Card List (No zooming needed) */}
+        <div className="mobile-card-list">
+          {filteredReviews.map((r) => (
+            <div key={r.id} className="mobile-filing-card" onClick={() => setSelectedReview(r)} style={{ cursor: "pointer" }}>
+              <div style={{ flex: 1, minWidth: 0, paddingRight: 10 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 2 }}>
+                  <span style={{ fontWeight: 700, fontFamily: "monospace", fontSize: 12, color: "var(--text)" }}>{r.id}</span>
+                  <span className={`status-badge ${r.status}`} style={{ fontSize: 10, padding: "2px 6px" }}>
+                    {r.status === "processing" ? "In Review" : r.status === "approved" ? "Approved" : "Action"}
+                  </span>
+                </div>
+                <div style={{ fontWeight: 600, fontSize: 13, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  {r.entity}
+                </div>
+                <div style={{ fontSize: 11, color: "var(--muted)", display: "flex", gap: 8 }}>
+                  <span>{r.service}</span>
+                  <span>•</span>
+                  <span>{r.fee}</span>
+                </div>
+              </div>
+              <button
+                className="btn btn-secondary btn-sm"
+                style={{ height: 30, fontSize: 11, padding: "0 10px", flex: "none" }}
+                onClick={(e) => { e.stopPropagation(); setSelectedReview(r); }}
+              >
+                Inspect
+              </button>
+            </div>
+          ))}
         </div>
       </div>
 

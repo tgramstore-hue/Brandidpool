@@ -145,7 +145,8 @@ export default function AdminServicesPage() {
 
       {/* Services Table */}
       <div className="card">
-        <div style={{ overflowX: "auto" }}>
+        {/* Desktop Table View */}
+        <div className="desktop-table-view" style={{ overflowX: "auto" }}>
           <table className="app-table">
             <thead>
               <tr>
@@ -202,6 +203,37 @@ export default function AdminServicesPage() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile View Card List */}
+        <div className="mobile-card-list">
+          {services.map((srv) => (
+            <div key={srv.id} className="mobile-filing-card" onClick={() => setEditingService({ ...srv })} style={{ cursor: "pointer" }}>
+              <div style={{ flex: 1, minWidth: 0, paddingRight: 10 }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 2 }}>
+                  <span style={{ fontWeight: 700, fontSize: 13, color: "var(--text)" }}>{srv.name}</span>
+                  <span className={`status-badge ${srv.status === "active" ? "approved" : "rejected"}`} style={{ fontSize: 10, padding: "2px 6px" }}>
+                    {srv.status === "active" ? "Available" : "Paused"}
+                  </span>
+                </div>
+                <div style={{ fontSize: 12, color: "var(--blue)", fontWeight: 500 }}>
+                  {srv.agency}
+                </div>
+                <div style={{ fontSize: 11, color: "var(--muted)", display: "flex", gap: 6, marginTop: 2 }}>
+                  <span style={{ fontWeight: 700, color: "var(--text)" }}>₦{srv.fee.toLocaleString()}</span>
+                  <span>•</span>
+                  <span>{srv.turnaround}</span>
+                </div>
+              </div>
+              <button
+                className="btn btn-secondary btn-sm"
+                style={{ height: 30, fontSize: 11, padding: "0 10px", flex: "none" }}
+                onClick={(e) => { e.stopPropagation(); setEditingService({ ...srv }); }}
+              >
+                Edit
+              </button>
+            </div>
+          ))}
         </div>
       </div>
 
