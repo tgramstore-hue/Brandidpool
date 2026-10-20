@@ -1,335 +1,124 @@
 "use client";
 
-import { useState } from "react";
-import DashboardLayout from "@/components/DashboardShell";
 import Link from "next/link";
-
-const userInfo = {
-  initials: "AO",
-  name: "Adebayo Ogunlesi",
-  email: "adebayo@whitestones.ng",
-};
-
-const recentApplications = [
-  { id: "APP-2026-001", service: "CAC Company Registration", type: "Private Limited", date: "15 Oct 2026", status: "processing", entity: "Whitestones Global Logistics Ltd" },
-  { id: "APP-2026-002", service: "NIN Identity Verification", type: "Individual Biometrics", date: "12 Oct 2026", status: "approved", entity: "Adebayo Olumide Ogunlesi" },
-  { id: "APP-2026-003", service: "FIRS Corporate Tax TIN", type: "Corporate Tax", date: "10 Oct 2026", status: "pending", entity: "Whitestones Global Logistics Ltd" },
-  { id: "APP-2026-004", service: "D-U-N-S Global Identifier", type: "Global Enterprise", date: "08 Oct 2026", status: "approved", entity: "D&B Ref: 55-912-8401" },
-  { id: "APP-2026-005", service: "SCUML AML Clearance", type: "Compliance", date: "05 Oct 2026", status: "processing", entity: "Whitestones Global Logistics Ltd" },
-];
-
-const activityFeed = [
-  { color: "green", title: "NIN Digital Slip Generated", time: "2h ago", link: "/dashboard/documents", label: "View Slip →" },
-  { color: "blue", title: "CAC Registry Stamp Duties Paid", time: "5h ago", link: "/dashboard/applications", label: "Track →" },
-  { color: "orange", title: "Tax Office Declaration Notice", time: "1d ago", link: "/dashboard/applications", label: "Resolve →" },
-  { color: "green", title: "D-U-N-S Number Issued", time: "3d ago", link: "/dashboard/documents", label: "View Doc →" },
-];
+import UserLayout from "@/components/UserLayout";
 
 export default function DashboardPage() {
-  const [activeTab, setActiveTab] = useState("all");
-  const [selectedApp, setSelectedApp] = useState(null);
-
-  const filteredApps = activeTab === "all" 
-    ? recentApplications 
-    : recentApplications.filter(app => app.status === activeTab);
-
   return (
-    <DashboardLayout activeItem="overview" userInfo={userInfo}>
-      {/* Clean Header: No buttons, no banners */}
-      <div style={{ marginBottom: 18 }}>
-        <h1 style={{ font: "700 22px var(--display)", margin: 0, color: "var(--text)" }}>
-          Welcome, Adebayo 👋
-        </h1>
-        <p style={{ color: "var(--muted)", margin: "2px 0 0", fontSize: 13 }}>
-          Whitestones Global Logistics Ltd • Tier 3 Verified
-        </p>
+    <UserLayout title="Hello, Adaeze" actionLabel="New application" actionHref="/dashboard/apply">
+      {/* 3 Metric Cards */}
+      <div className="gr g3">
+        <div className="cd">
+          <p className="mu">In progress</p>
+          <p className="big">2</p>
+        </div>
+        <div className="cd">
+          <p className="mu">Ready to download</p>
+          <p className="big">1</p>
+        </div>
+        <div className="cd">
+          <p className="mu">Awaiting payment</p>
+          <p className="big">0</p>
+        </div>
       </div>
 
-      {/* Horizontal Compact Cards for Desktop & Mobile */}
-      <div className="metrics-row-compact">
-        <div className="metric-card-compact">
-          <div className="m-label">
-            <span>Active Filings</span>
-            <span style={{ fontSize: 10, fontWeight: 700, color: "var(--blue)" }}>In Flight</span>
-          </div>
-          <div className="m-val">3</div>
-          <div className="m-sub">CAC • TIN • SCUML</div>
+      {/* Hero Banner */}
+      <div className="dk row sp" style={{ margin: "20px 0", flexWrap: "wrap", gap: 16 }}>
+        <div>
+          <h2 style={{ fontSize: 24, fontWeight: 600 }}>Start a new application</h2>
+          <p style={{ color: "#C3D6DE", marginTop: 6 }}>Choose a service and fill one form.</p>
         </div>
+        <Link className="bt w" href="/dashboard/services">
+          Browse services
+        </Link>
+      </div>
 
-        <div className="metric-card-compact">
-          <div className="m-label">
-            <span>Approved</span>
-            <span style={{ fontSize: 10, fontWeight: 700, color: "#059642" }}>✓ Ready</span>
-          </div>
-          <div className="m-val" style={{ color: "#059642" }}>2</div>
-          <div className="m-sub">NIN & D-U-N-S</div>
-        </div>
-
-        <div className="metric-card-compact">
-          <div className="m-label">
-            <span>Action Required</span>
-            <span style={{ fontSize: 10, fontWeight: 700, color: "var(--orange)" }}>1 Notice</span>
-          </div>
-          <div className="m-val" style={{ color: "var(--orange)" }}>1</div>
-          <div className="m-sub">TIN document upload</div>
-        </div>
-
-        <div className="metric-card-compact">
-          <div className="m-label">
-            <span>Wallet</span>
-            <Link href="/dashboard/billing" style={{ fontSize: 10, color: "var(--blue)", fontWeight: 700 }}>
-              Top Up +
+      {/* Recent Applications & Ready For You */}
+      <div className="gr g21">
+        <div className="cd">
+          <div className="row sp" style={{ marginBottom: 12 }}>
+            <h3>Recent applications</h3>
+            <Link href="/dashboard/applications" style={{ color: "#0B5F82", fontWeight: 600 }}>
+              View all
             </Link>
           </div>
-          <div className="m-val">₦185,000</div>
-          <div className="m-sub">Available balance</div>
+          <table>
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <Link href="/dashboard/applications/BP-1042" style={{ color: "inherit", textDecoration: "none" }}>
+                    <b>Business name registration</b>
+                  </Link>
+                </td>
+                <td>12 Oct</td>
+                <td>
+                  <span className="tg o">With partner</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <Link href="/dashboard/applications/BP-1038" style={{ color: "inherit", textDecoration: "none" }}>
+                    <b>NIN slip</b>
+                  </Link>
+                </td>
+                <td>08 Oct</td>
+                <td>
+                  <span className="tg g">Ready</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <Link href="/dashboard/applications/BP-1021" style={{ color: "inherit", textDecoration: "none" }}>
+                    <b>FIRS TIN</b>
+                  </Link>
+                </td>
+                <td>02 Oct</td>
+                <td>
+                  <span className="tg">Filed</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className="cd">
+          <h3>Ready for you</h3>
+          <p className="mu" style={{ margin: "8px 0 20px" }}>
+            NIN slip, PDF
+          </p>
+          <Link className="bt f s" href="/dashboard/documents">
+            Download
+          </Link>
         </div>
       </div>
 
-      {/* Quick Nav Row */}
-      <div className="quick-actions" style={{ marginBottom: 20 }}>
-        <Link href="/dashboard/services" className="quick-action" style={{ padding: "12px 14px" }}>
-          <div className="quick-action-icon" style={{ background: "var(--navy)", width: 34, height: 34, borderRadius: 8 }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" style={{ width: 16, height: 16 }}>
-              <path d="M12 5v14M5 12h14" />
-            </svg>
-          </div>
-          <div>
-            <div className="quick-action-text" style={{ fontSize: 13 }}>Services Catalog</div>
-            <div className="quick-action-desc" style={{ fontSize: 11 }}>CAC, NIN, TIN, D-U-N-S</div>
-          </div>
+      {/* Popular Services */}
+      <h3 style={{ margin: "32px 0 16px" }}>Popular services</h3>
+      <div className="gr g4">
+        <Link className="tile t1" href="/dashboard/apply">
+          <h3>NIN slip</h3>
+          <span>₦1,200</span>
         </Link>
-
-        <Link href="/dashboard/applications" className="quick-action" style={{ padding: "12px 14px" }}>
-          <div className="quick-action-icon" style={{ background: "var(--orange)", width: 34, height: 34, borderRadius: 8 }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" style={{ width: 16, height: 16 }}>
-              <circle cx="11" cy="11" r="7" />
-              <path d="M21 21l-4-4" />
-            </svg>
-          </div>
-          <div>
-            <div className="quick-action-text" style={{ fontSize: 13 }}>Applications Tracker</div>
-            <div className="quick-action-desc" style={{ fontSize: 11 }}>Review progress & status</div>
-          </div>
+        <Link className="tile t2" href="/dashboard/apply">
+          <h3>Business name</h3>
+          <span>₦45,000</span>
         </Link>
-
-        <Link href="/dashboard/documents" className="quick-action" style={{ padding: "12px 14px" }}>
-          <div className="quick-action-icon" style={{ background: "var(--green)", width: 34, height: 34, borderRadius: 8 }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" style={{ width: 16, height: 16 }}>
-              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
-            </svg>
-          </div>
-          <div>
-            <div className="quick-action-text" style={{ fontSize: 13 }}>Document Vault</div>
-            <div className="quick-action-desc" style={{ fontSize: 11 }}>Download verified files</div>
-          </div>
+        <Link className="tile t3" href="/dashboard/apply">
+          <h3>FIRS TIN</h3>
+          <span>₦5,000</span>
         </Link>
-
-        <Link href="/dashboard/billing" className="quick-action" style={{ padding: "12px 14px" }}>
-          <div className="quick-action-icon" style={{ background: "var(--blue)", width: 34, height: 34, borderRadius: 8 }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" style={{ width: 16, height: 16 }}>
-              <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-              <line x1="1" y1="10" x2="23" y2="10" />
-            </svg>
-          </div>
-          <div>
-            <div className="quick-action-text" style={{ fontSize: 13 }}>Wallet & Billing</div>
-            <div className="quick-action-desc" style={{ fontSize: 11 }}>Balance & receipts</div>
-          </div>
+        <Link className="tile t4" href="/dashboard/apply">
+          <h3>Trademark</h3>
+          <span>₦50,000</span>
         </Link>
       </div>
-
-      {/* Main Grid: Filings & Timeline */}
-      <div className="dash-columns">
-        {/* Filings Card */}
-        <div className="card" style={{ padding: "16px 20px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-            <h3 style={{ font: "700 16px var(--display)", margin: 0 }}>Statutory Filings</h3>
-            <Link href="/dashboard/applications" style={{ fontSize: 12, color: "var(--dot)", fontWeight: 600 }}>
-              View all →
-            </Link>
-          </div>
-
-          <div className="tab-bar">
-            {[
-              { key: "all", label: "All" },
-              { key: "processing", label: "In Review" },
-              { key: "approved", label: "Approved" },
-              { key: "pending", label: "Action" },
-            ].map((tab) => (
-              <button
-                key={tab.key}
-                className={`tab-btn${activeTab === tab.key ? " active" : ""}`}
-                onClick={() => setActiveTab(tab.key)}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Desktop Table */}
-          <div className="desktop-table-view" style={{ overflowX: "auto" }}>
-            <table className="app-table">
-              <thead>
-                <tr>
-                  <th>Filing ID</th>
-                  <th>Service</th>
-                  <th>Date</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredApps.map((app) => (
-                  <tr key={app.id}>
-                    <td>
-                      <span style={{ fontWeight: 600, fontFamily: "monospace", fontSize: 13 }}>{app.id}</span>
-                    </td>
-                    <td>
-                      <div style={{ fontWeight: 600, fontSize: 13 }}>{app.service}</div>
-                      <div style={{ fontSize: 11, color: "var(--muted)" }}>{app.entity}</div>
-                    </td>
-                    <td style={{ color: "var(--muted)", fontSize: 12 }}>{app.date}</td>
-                    <td>
-                      <span className={`status-badge ${app.status}`} style={{ fontSize: 11, padding: "2px 8px" }}>
-                        {app.status === "processing" ? "In Review" :
-                         app.status === "approved" ? "Approved" : "Action"}
-                      </span>
-                    </td>
-                    <td>
-                      <button
-                        className="btn btn-secondary btn-sm"
-                        style={{ padding: "4px 10px", fontSize: 12 }}
-                        onClick={() => setSelectedApp(app)}
-                      >
-                        Details
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Mobile Card List (No Zooming Needed!) */}
-          <div>
-            {filteredApps.map((app) => (
-              <div key={`m-${app.id}`} className="mobile-filing-card">
-                <div>
-                  <div style={{ fontWeight: 600, fontSize: 14 }}>{app.service}</div>
-                  <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 2 }}>
-                    {app.id} • {app.date}
-                  </div>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <span className={`status-badge ${app.status}`} style={{ fontSize: 11, padding: "2px 8px" }}>
-                    {app.status === "processing" ? "Review" :
-                     app.status === "approved" ? "Approved" : "Action"}
-                  </span>
-                  <button
-                    className="btn btn-secondary btn-sm"
-                    style={{ padding: "4px 8px", fontSize: 11 }}
-                    onClick={() => setSelectedApp(app)}
-                  >
-                    View
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Activity Stream with Direct Links */}
-        <div className="card" style={{ padding: "16px 20px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-            <h3 style={{ font: "700 16px var(--display)", margin: 0 }}>Activity Timeline</h3>
-            <span style={{ fontSize: 11, color: "var(--muted)", fontWeight: 600 }}>Live Updates</span>
-          </div>
-
-          <div>
-            {activityFeed.map((item, i) => (
-              <div key={i} className="pro-feed-item" style={{ alignItems: "center", justifyContent: "space-between" }}>
-                <div style={{ display: "flex", gap: 10, alignItems: "flex-start", flex: 1, minWidth: 0 }}>
-                  <span className={`pro-feed-dot ${item.color}`}></span>
-                  <div style={{ minWidth: 0 }}>
-                    <div className="pro-feed-title" style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                      {item.title}
-                    </div>
-                    <div className="pro-feed-time">{item.time}</div>
-                  </div>
-                </div>
-                <Link
-                  href={item.link}
-                  style={{
-                    fontSize: 11,
-                    fontWeight: 700,
-                    color: "var(--blue)",
-                    whiteSpace: "nowrap",
-                    flex: "none",
-                    marginLeft: 8,
-                    padding: "3px 8px",
-                    borderRadius: 6,
-                    background: "rgba(31,167,217,0.08)",
-                  }}
-                >
-                  {item.label}
-                </Link>
-              </div>
-            ))}
-          </div>
-
-          <div style={{ marginTop: 16, paddingTop: 12, borderTop: "1px solid var(--line)", fontSize: 12, color: "var(--muted)" }}>
-            NUBAN: <b>0829148102</b> (Wema Bank)
-          </div>
-        </div>
-      </div>
-
-      {/* Details Modal */}
-      {selectedApp && (
-        <div className="modal-overlay" onClick={() => setSelectedApp(null)}>
-          <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <div>
-                <span className={`status-badge ${selectedApp.status}`} style={{ marginBottom: 4, fontSize: 11 }}>
-                  {selectedApp.status.toUpperCase()}
-                </span>
-                <h3 style={{ margin: 0, fontSize: 18 }}>{selectedApp.service}</h3>
-                <div style={{ fontSize: 12, color: "var(--muted)" }}>Reference: {selectedApp.id}</div>
-              </div>
-              <button className="modal-close" onClick={() => setSelectedApp(null)}>×</button>
-            </div>
-            <div className="modal-body">
-              <div style={{ background: "var(--soft)", padding: 12, borderRadius: 10 }}>
-                <div style={{ fontSize: 11, color: "var(--muted)" }}>Target Entity:</div>
-                <div style={{ fontWeight: 600, fontSize: 14 }}>{selectedApp.entity}</div>
-                <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 4 }}>Date: {selectedApp.date}</div>
-              </div>
-              <div>
-                <div style={{ fontWeight: 600, fontSize: 13, marginBottom: 4 }}>Status Note:</div>
-                <div style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.5 }}>
-                  {selectedApp.status === "approved"
-                    ? "Application verified and approved by the registry authorities. Official certificate is available in your Document Vault."
-                    : selectedApp.status === "processing"
-                    ? "Currently undergoing verification at the registry desk."
-                    : "Action required: Additional documentation requested for tax clearance."}
-                </div>
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button className="btn btn-secondary btn-sm" onClick={() => setSelectedApp(null)}>Close</button>
-              {selectedApp.status === "approved" ? (
-                <Link href="/dashboard/documents" className="btn btn-primary btn-sm" onClick={() => setSelectedApp(null)}>
-                  Document Vault
-                </Link>
-              ) : (
-                <Link href="/dashboard/applications" className="btn btn-primary btn-sm" onClick={() => setSelectedApp(null)}>
-                  Track Application
-                </Link>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-    </DashboardLayout>
+    </UserLayout>
   );
 }

@@ -2,125 +2,111 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    password: "",
-    agree: false,
-  });
+  const router = useRouter();
+  const [fullName, setFullName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [agree, setAgree] = useState(false);
 
-  const update = (field) => (e) =>
-    setForm({ ...form, [field]: e.target.type === "checkbox" ? e.target.checked : e.target.value });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    router.push("/dashboard");
+  };
 
   return (
-    <div className="auth-page">
-      <div className="auth-card">
-        <Link className="logo" href="/" style={{ marginBottom: 32, display: "inline-flex" }}>
+    <div className="au">
+      <div className="al">
+        <Link className="lg" href="/">
           brandid<b>pool</b>
         </Link>
-        <h1>Create your account</h1>
-        <p className="auth-subtitle">Get started with identity and business services.</p>
+        <div>
+          <h1 style={{ fontSize: 52, lineHeight: 1.1, maxWidth: "12ch" }}>
+            Start in a minute.
+          </h1>
+          <p style={{ color: "#B8CBD3", marginTop: 16, fontSize: 19 }}>
+            Fill one form. We handle the rest.
+          </p>
+        </div>
+        <p style={{ color: "#9DB8C4" }}>No paperwork. No queues.</p>
+      </div>
 
-        <form onSubmit={(e) => e.preventDefault()}>
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="signup-first">First name</label>
-              <input
-                id="signup-first"
-                type="text"
-                placeholder="John"
-                value={form.firstName}
-                onChange={update("firstName")}
-                autoComplete="given-name"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="signup-last">Last name</label>
-              <input
-                id="signup-last"
-                type="text"
-                placeholder="Doe"
-                value={form.lastName}
-                onChange={update("lastName")}
-                autoComplete="family-name"
-              />
-            </div>
+      <div className="ar">
+        <form className="fm" onSubmit={handleSubmit}>
+          <div>
+            <h2>Create your account</h2>
+            <p className="mu">It is free to join.</p>
           </div>
-
-          <div className="form-group">
-            <label htmlFor="signup-email">Email address</label>
+          <div>
+            <label htmlFor="su1">Full name</label>
             <input
-              id="signup-email"
+              className="in"
+              id="su1"
+              placeholder="As on your ID"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="su2">Phone number</label>
+            <input
+              className="in"
+              id="su2"
+              placeholder="0803 000 0000"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="su3">Email (optional)</label>
+            <input
+              className="in"
+              id="su3"
               type="email"
               placeholder="you@example.com"
-              value={form.email}
-              onChange={update("email")}
-              autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-
-          <div className="form-group">
-            <label htmlFor="signup-phone">Phone number</label>
+          <div>
+            <label htmlFor="su4">Password</label>
             <input
-              id="signup-phone"
-              type="tel"
-              placeholder="+234 800 000 0000"
-              value={form.phone}
-              onChange={update("phone")}
-              autoComplete="tel"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="signup-password">Password</label>
-            <input
-              id="signup-password"
+              className="in"
+              id="su4"
               type="password"
-              placeholder="Create a strong password"
-              value={form.password}
-              onChange={update("password")}
-              autoComplete="new-password"
+              placeholder="At least 8 characters"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
-
-          <div className="form-check">
+          <div className="chk">
             <input
-              id="signup-agree"
               type="checkbox"
-              checked={form.agree}
-              onChange={update("agree")}
+              id="su5"
+              checked={agree}
+              onChange={(e) => setAgree(e.target.checked)}
+              required
             />
-            <label htmlFor="signup-agree">
-              I agree to the <a href="#">Terms of Service</a> and{" "}
-              <a href="#">Privacy Policy</a>
+            <label htmlFor="su5" style={{ fontWeight: 400, margin: 0 }}>
+              I agree to the Terms of Service and Privacy Policy.
             </label>
           </div>
-
-          <button type="submit" className="auth-btn" id="signup-submit">
+          <button className="bt f" type="submit">
             Create account
           </button>
+          <p className="mu">
+            Already have an account?{" "}
+            <Link href="/login" style={{ color: "#0B5F82", fontWeight: 600 }}>
+              Sign in
+            </Link>
+          </p>
         </form>
-
-        <div className="auth-divider">or</div>
-
-        <button className="social-btn" id="signup-google">
-          <svg viewBox="0 0 24 24">
-            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
-            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-          </svg>
-          Sign up with Google
-        </button>
-
-        <p className="auth-footer">
-          Already have an account?{" "}
-          <Link href="/login">Sign in</Link>
-        </p>
       </div>
     </div>
   );
